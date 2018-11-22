@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+
+	"github.com/Ariemeth/go-quest/equipment"
 )
 
 func main() {
@@ -9,6 +11,8 @@ func main() {
 	c := createCharacter()
 
 	fmt.Println(c)
+
+	fmt.Println(equipment.Body)
 }
 
 func createCharacter() player {
@@ -17,6 +21,7 @@ func createCharacter() player {
 
 	p := player{
 		Class:     testClass,
+		Equipment: map[equipment.Location]equipment.Item{},
 		Name:      testName,
 		MaxHP:     4,
 		MaxMP:     4,

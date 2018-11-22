@@ -1,21 +1,13 @@
 package main
 
+import (
+	"github.com/Ariemeth/go-quest/equipment"
+)
+
 type player struct {
-	Campaign  campaign
-	Class     string
-	Equipment struct {
-		Head      equipment
-		Face      equipment
-		Body      equipment
-		Arms      equipment
-		Legs      equipment
-		Cloak     equipment
-		Shoulders equipment
-		Ring1     equipment
-		Ring2     equipment
-		Necklace  equipment
-		Weapon    equipment
-	}
+	Campaign   campaign
+	Class      string
+	Equipment  map[equipment.Location]equipment.Item
 	Experience uint64
 	Gold       uint64
 	Level      uint64
