@@ -11,6 +11,13 @@ type Item struct {
 	Slot  slot.Location
 }
 
+type attribute struct {
+	name  string
+	level int
+}
+
+type name attribute
+
 func Generate(itemType slot.Location, level int) Item {
 
 	switch itemType {
