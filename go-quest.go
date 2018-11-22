@@ -1,5 +1,4 @@
-package main
+package goquest
 
 func main() {
 	
-}
