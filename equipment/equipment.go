@@ -1,28 +1,21 @@
 package equipment
 
+import (
+	"github.com/Ariemeth/go-quest/equipment/slot"
+)
+
 type Item struct {
-	Bonus int64
-	Slot  Location
+	Bonus int
+	Level int
 	Name  string
+	Slot  slot.Location
 }
 
-type Location int
+func Generate(itemType slot.Location, level int) Item {
 
-const (
-	Arms Location = iota
-	Back
-	Body
-	Face
-	Feet
-	Finger1
-	Finger2
-	Hand
-	Head
-	Legs
-	Necklace
-	Shield
-	Shoulders
-	Waist
-	Weapon
-	Wrist
-)
+	switch itemType {
+	case slot.Weapon:
+		return generateWeapon(level)
+	}
+	return Item{}
+}
