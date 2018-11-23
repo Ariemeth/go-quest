@@ -1,5 +1,6 @@
 package slot
 
+// Location represents a specific equipmet slot.
 type Location int
 
 const (
