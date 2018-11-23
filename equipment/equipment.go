@@ -5,18 +5,30 @@ import (
 )
 
 type Item struct {
-	Bonus int
-	Level int
-	Name  string
-	Slot  slot.Location
+	Attributes []attribute
+	Bonus      int
+	Level      int
+	Name       string
+	Slot       slot.Location
+}
+
+func (i Item) Power() int {
+	var totalBonus int
+	for _, a := range i.Attributes {
+		totalBonus += a.level
+	}
+	return i.Level + totalBonus
 }
 
 type attribute struct {
+	level int
+	name  string
+}
+
+type name struct {
 	name  string
 	level int
 }
-
-type name attribute
 
 func Generate(itemType slot.Location, level int) Item {
 
