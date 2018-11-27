@@ -25,8 +25,8 @@ func (i Item) Power() int {
 }
 
 type attribute struct {
-	level int
 	name  string
+	level int
 }
 
 type name struct {

@@ -8,33 +8,32 @@ import (
 
 var (
 	offenseAttrib = []attribute{
-		{0, "Polished"},
-		{1, "Serrated"},
-		{2, "Heavy"},
-		{3, "Pronged"},
-		{4, "Steely"},
-		{5, "Vicious"},
-		{6, "Venomed"},
-		{7, "Stabbity"},
-		{8, "Dancing"},
-		{9, "Invisible"},
-		{10, "Vorpal"},
+		{"Polished", 1},
+		{"Serrated", 1},
+		{"Heavy", 1},
+		{"Pronged", 2},
+		{"Steely", 2},
+		{"Vicious", 3},
+		{"Venomed", 4},
+		{"Stabbity", 4},
+		{"Dancing", 5},
+		{"Invisible", 6},
+		{"Vorpal", 7},
 	}
 
 	offenseAttribBad = []attribute{
-		{-10, "Nerf"},
-		{-9, "Rubber"},
-		{-8, "Padded"},
-		{-7, "Mini"},
-		{-6, "Bent"},
-		{-5, "Rusty"},
-		{-4, "Unbalanced"},
-		{-3, "Dull"},
-		{-2, "Tarnished"},
-		{-1, "Worn"},
+		{"Dull", -2},
+		{"Tarnished", -1},
+		{"Rusty", -3},
+		{"Padded", -5},
+		{"Bent", -4},
+		{"Mini", -4},
+		{"Rubber", -6},
+		{"Nerf", -7},
+		{"Unbalanced", -2},
 	}
 
-	weaponBase = []name{
+	weapons = []name{
 		{"Stick", 0},
 		{"Broken Bottle", 1},
 		{"Shiv", 1},
@@ -82,12 +81,12 @@ func generateWeapon(targetLevel int) Item {
 	coreLevel := targetLevel
 	if coreLevel < 1 {
 		coreLevel = 1
-	} else if coreLevel >= len(weaponBase) {
-		coreLevel = len(weaponBase) - 1
+	} else if coreLevel >= len(weapons) {
+		coreLevel = len(weapons) - 1
 	}
 
 	// get the type of weapon to create
-	w := weaponBase[rand.Intn(coreLevel)]
+	w := weapons[rand.Intn(coreLevel)]
 
 	weapon := Item{
 		Name:  w.name,
