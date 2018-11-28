@@ -2,13 +2,26 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
+	"time"
+
+	"github.com/Ariemeth/go-quest/equipment"
+	"github.com/Ariemeth/go-quest/equipment/slot"
 )
 
 func main() {
 
+	rand.Seed(time.Now().UnixNano())
+
 	c := createCharacter()
 
-	fmt.Println(c)
+	w, err := equipment.Generate(slot.Weapon, 5)
+	if err == nil {
+		c.Equipment[slot.Weapon] = w
+	}
+
+	fmt.Printf("%+v", c)
+
 }
 
 func createCharacter() player {
@@ -17,6 +30,7 @@ func createCharacter() player {
 
 	p := player{
 		Class:     testClass,
+		Equipment: map[slot.Location]equipment.Item{},
 		Name:      testName,
 		MaxHP:     4,
 		MaxMP:     4,
