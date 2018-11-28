@@ -1,11 +1,5 @@
 package equipment
 
-import (
-	"math/rand"
-
-	"github.com/Ariemeth/go-quest/equipment/slot"
-)
-
 var (
 	offenseAttrib = []attribute{
 		{"Polished", 1},
@@ -33,7 +27,7 @@ var (
 		{"Unbalanced", -2},
 	}
 
-	weapons = []name{
+	weapons = []attribute{
 		{"Stick", 0},
 		{"Broken Bottle", 1},
 		{"Shiv", 1},
@@ -78,24 +72,17 @@ var (
 
 func generateWeapon(targetLevel int) Item {
 
-	coreLevel := targetLevel
-	if coreLevel < 1 {
-		coreLevel = 1
-	} else if coreLevel >= len(weapons) {
-		coreLevel = len(weapons) - 1
-	}
-
 	// get the type of weapon to create
-	w := weapons[rand.Intn(coreLevel)]
-
-	weapon := Item{
-		Name:  w.name,
-		Level: w.level,
-		Slot:  slot.Weapon,
+	w, err := lPick(weapons, targetLevel)
+	if err != nil {
+		//TODO return error
 	}
 
-	if weapon.Power() < targetLevel {
-		weapon.Bonus = targetLevel - weapon.Power()
+	var weapon Item
+	if qd := targetLevel - w.level; qd >= 0 {
+		weapon, _ = buildItem(offenseAttrib, w)
+	} else {
+		weapon, _ = buildItem(offenseAttribBad, w)
 	}
 
 	return weapon

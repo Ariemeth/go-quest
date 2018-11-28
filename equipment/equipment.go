@@ -1,6 +1,9 @@
 package equipment
 
 import (
+	"errors"
+	"math/rand"
+
 	"github.com/Ariemeth/go-quest/equipment/slot"
 )
 
@@ -45,4 +48,41 @@ func Generate(itemType slot.Location, level int) Item {
 		return generateWeapon(level)
 	}
 	return Item{}
+}
+
+// lPick attempts to choose a random item from a slice with the
+// a target power level close to the requested level.
+func lPick(list []attribute, targetLevel int) (attribute, error) {
+
+	if list == nil {
+		return attribute{}, errors.New("nil list")
+	}
+
+	pick := list[rand.Intn(len(list))]
+
+	for i := 0; i <= 5; i++ {
+		best := pick.level
+		p := randomPick(list)
+		if absInt(targetLevel-best) > absInt(targetLevel-p.level) {
+			pick = p
+		}
+	}
+
+	return pick, nil
+}
+
+func buildItem(list []attribute, item attribute) (Item, error) {
+
+	return Item{}, nil
+}
+
+func absInt(x int) int {
+	if x < 0 {
+		return -x
+	}
+	return x
+}
+
+func randomPick(list []attribute) attribute {
+	return list[rand.Intn(len(list))]
 }
