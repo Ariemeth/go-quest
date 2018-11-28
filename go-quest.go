@@ -11,14 +11,16 @@ import (
 
 func main() {
 
-	rand.Seed(time.Now().UTC().UnixNano())
+	rand.Seed(time.Now().UnixNano())
 
 	c := createCharacter()
 
-	w := equipment.Generate(slot.Weapon, 7)
-	c.Equipment[slot.Weapon] = w
+	w, err := equipment.Generate(slot.Weapon, 5)
+	if err == nil {
+		c.Equipment[slot.Weapon] = w
+	}
 
-	fmt.Println(c)
+	fmt.Printf("%+v", c)
 
 }
 

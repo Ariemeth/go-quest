@@ -27,7 +27,7 @@ var (
 		{"Unbalanced", -2},
 	}
 
-	weapons = []attribute{
+	weapons = []equipment{
 		{"Stick", 0},
 		{"Broken Bottle", 1},
 		{"Shiv", 1},
@@ -69,21 +69,3 @@ var (
 		{"Bandyclef", 15},
 	}
 )
-
-func generateWeapon(targetLevel int) Item {
-
-	// get the type of weapon to create
-	w, err := lPick(weapons, targetLevel)
-	if err != nil {
-		//TODO return error
-	}
-
-	var weapon Item
-	if qd := targetLevel - w.level; qd >= 0 {
-		weapon, _ = buildItem(offenseAttrib, w)
-	} else {
-		weapon, _ = buildItem(offenseAttribBad, w)
-	}
-
-	return weapon
-}
