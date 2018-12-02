@@ -1,8 +1,11 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"math/rand"
+	"os"
+	"strings"
 	"time"
 
 	"github.com/Ariemeth/go-quest/equipment"
@@ -13,7 +16,7 @@ func main() {
 
 	rand.Seed(time.Now().UnixNano())
 
-	c := createCharacter()
+	c := newPlayer()
 
 	w, err := equipment.Generate(slot.Weapon, 5)
 	if err == nil {
@@ -24,27 +27,44 @@ func main() {
 
 }
 
-func createCharacter() player {
-	testName := "npc1"
-	testClass := "class1"
+func newPlayer() player {
+
+	scanner := bufio.NewScanner(os.Stdin)
+	var s stats
+	var n string
+	var isDone bool
+	for !isDone {
+		n = generateName()
+		s = generateInitialStats()
+
+		fmt.Println("        Name:", n)
+		fmt.Println("    Strength:", s.Strength)
+		fmt.Println("   Dexterity:", s.Dexterity)
+		fmt.Println("Constitution:", s.Constitution)
+		fmt.Println("Intelligence:", s.Intelligence)
+		fmt.Println("      Wisdom:", s.Wisdom)
+		fmt.Println("    Charisma:", s.Charisma)
+		fmt.Println("       Total:", s.Total())
+
+		fmt.Print("Keep character? (y/n)")
+		scanner.Scan()
+		input := scanner.Text()
+		li := strings.ToLower(input)
+		fmt.Println(li)
+		if li == "y" {
+			isDone = true
+		}
+	}
 
 	p := player{
-		Class:     testClass,
+		Class:     "no class",
 		Equipment: map[slot.Location]equipment.Item{},
-		Name:      testName,
+		Name:      n,
 		MaxHP:     4,
 		MaxMP:     4,
 		Spellbook: Spells{},
-		Stats: stats{
-			Charisma:     12,
-			Constitution: 13,
-			Dexterity:    14,
-			Intelligence: 15,
-			Strength:     16,
-			Wisdom:       17,
-		},
+		Stats:     s,
 	}
 
 	return p
-
 }
