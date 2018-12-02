@@ -30,11 +30,10 @@ func main() {
 func newPlayer() player {
 
 	scanner := bufio.NewScanner(os.Stdin)
+
+	n := generateName()
 	var s stats
-	var n string
-	var isDone bool
-	for !isDone {
-		n = generateName()
+	for isDone := false; !isDone; {
 		s = generateInitialStats()
 
 		fmt.Println("        Name:", n)
@@ -49,9 +48,7 @@ func newPlayer() player {
 		fmt.Print("Keep character? (y/n)")
 		scanner.Scan()
 		input := scanner.Text()
-		li := strings.ToLower(input)
-		fmt.Println(li)
-		if li == "y" {
+		if strings.ToLower(input) == "y" {
 			isDone = true
 		}
 	}
@@ -60,8 +57,8 @@ func newPlayer() player {
 		Class:     "no class",
 		Equipment: map[slot.Location]equipment.Item{},
 		Name:      n,
-		MaxHP:     4,
-		MaxMP:     4,
+		MaxHP:     1,
+		MaxMP:     1,
 		Spellbook: Spells{},
 		Stats:     s,
 	}
