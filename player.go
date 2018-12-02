@@ -24,7 +24,6 @@ type player struct {
 }
 
 func generateName() string {
-
 	nameParts := [][]string{
 		[]string{
 			"br", "cr", "dr", "fr", "gr", "j", "kr", "l", "m", "n", "pr", "", "", "", "r", "sh", "tr", "v", "wh", "x", "y", "z",

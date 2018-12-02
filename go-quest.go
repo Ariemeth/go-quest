@@ -13,7 +13,6 @@ import (
 )
 
 func main() {
-
 	rand.Seed(time.Now().UnixNano())
 
 	c := newPlayer()
@@ -28,7 +27,6 @@ func main() {
 }
 
 func newPlayer() player {
-
 	scanner := bufio.NewScanner(os.Stdin)
 
 	n := generateName()
