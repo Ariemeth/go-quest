@@ -5,7 +5,7 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/Ariemeth/go-quest/equipment/slot"
+	"github.com/Ariemeth/go-quest/internal/game/equipment/slot"
 )
 
 const (
