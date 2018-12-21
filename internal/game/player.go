@@ -21,18 +21,18 @@ type player struct {
 	MaxHP      uint64
 	MaxMP      uint64
 	Name       string
-	Spellbook  Spells
+	Spellbook  Spellbook
 	Stats      stats
 }
 
-func (p *player) levelUp() {
+func (p *player) LevelUp() {
 	p.MaxHP += uint64(p.Stats.Constitution/3 + 1 + rand.Uint32()%4)
 	p.MaxMP += uint64(p.Stats.Intelligence/3 + 1 + rand.Uint32()%4)
 
 	p.Stats.IncreaseRandomStat()
 	p.Stats.IncreaseRandomStat()
 
-	// TODO add spell level up
+	p.Spellbook.IncreaseRandomSpell(p.Stats.Wisdom, p.Level)
 }
 
 func NewPlayer() player {
@@ -66,7 +66,7 @@ func NewPlayer() player {
 		Name:      n,
 		MaxHP:     1,
 		MaxMP:     1,
-		Spellbook: Spells{},
+		Spellbook: NewSpellbook(),
 		Stats:     s,
 	}
 
