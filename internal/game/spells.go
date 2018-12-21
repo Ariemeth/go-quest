@@ -1,4 +1,4 @@
-package main
+package game
 
 // Spells is a slice of Spell
 type Spells []Spell
