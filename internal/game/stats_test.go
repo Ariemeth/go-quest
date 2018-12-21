@@ -1,6 +1,7 @@
 package game
 
 import (
+	"reflect"
 	"testing"
 )
 
@@ -8,7 +9,7 @@ func Test_stats_Total(t *testing.T) {
 	tests := []struct {
 		name string
 		s    stats
-		want uint
+		want uint64
 	}{
 		{
 			name: "total value",
@@ -54,6 +55,28 @@ func Test_generateInitialStats(t *testing.T) {
 			}
 			if got.Wisdom <= 0 {
 				t.Errorf("Wisdom = %v, should be positive", got.Wisdom)
+			}
+		})
+	}
+}
+
+func Test_stats_IncreaseRandomStat(t *testing.T) {
+
+	tests := []struct {
+		name string
+		s    *stats
+	}{
+		{
+			name: "increase random stat on default stat struct",
+			s:    &stats{},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			o := *tt.s
+			tt.s.IncreaseRandomStat()
+			if reflect.DeepEqual(*tt.s, o) {
+				t.Errorf("IncreaseRandomStat() did not change the stat %v", *tt.s)
 			}
 		})
 	}

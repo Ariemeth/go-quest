@@ -25,6 +25,16 @@ type player struct {
 	Stats      stats
 }
 
+func (p *player) levelUp() {
+	p.MaxHP += uint64(p.Stats.Constitution/3 + 1 + rand.Uint32()%4)
+	p.MaxMP += uint64(p.Stats.Intelligence/3 + 1 + rand.Uint32()%4)
+
+	p.Stats.IncreaseRandomStat()
+	p.Stats.IncreaseRandomStat()
+
+	// TODO add spell level up
+}
+
 func NewPlayer() player {
 	scanner := bufio.NewScanner(os.Stdin)
 
