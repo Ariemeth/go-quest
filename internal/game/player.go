@@ -35,6 +35,7 @@ func (p *player) LevelUp() {
 	p.Spellbook.IncreaseRandomSpell(p.Stats.Wisdom, p.Level)
 }
 
+// NewPlayer creates a new random character.
 func NewPlayer() player {
 	scanner := bufio.NewScanner(os.Stdin)
 
