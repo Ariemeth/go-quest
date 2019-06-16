@@ -12,17 +12,15 @@ import (
 )
 
 type player struct {
-	Campaign   campaign
-	Class      string
-	Equipment  map[slot.Location]equipment.Item
-	Experience uint64
-	Gold       uint64
-	Level      uint64
-	MaxHP      uint64
-	MaxMP      uint64
-	Name       string
-	Spellbook  Spellbook
-	Stats      stats
+	Campaign  campaign
+	Class     string
+	Equipment map[slot.Location]equipment.Item
+	Level     uint64
+	MaxHP     uint64
+	MaxMP     uint64
+	Name      string
+	Spellbook Spellbook
+	Stats     stats
 }
 
 func (p *player) LevelUp() {
